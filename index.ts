@@ -1,50 +1,64 @@
-const menu: {name: string, price: number}[] = [
+type Pizza = {
+    name: string
+    price: number
+}
+
+type Order = Pizza & {
+    id: number
+    status: string
+}
+
+let menu = [
     { name: "margarita", price: 10 },
     { name: "pepperoni", price: 10 },
     { name: "hawaiian", price: 10 },
     { name: "hawaiian", price: 10 }
-]
+];
 
 let cashInRegister: number = 100;
-const orderQueue: {name: string, price: number, id: number, status: string}[] = [];
+let orderQueue: Order[] = [];
 let orderId: number = 1;
 
-const addnewPizza = (pizza) => {
+const addNewPizza = (pizza: Pizza) => {
     menu.push(pizza);
-}
+};
 
-addnewPizza({name: "jashim", price: 20});
-// console.log(menu);
+addNewPizza({ name: "jashim", price: 20 });
 
+const placeOrder = (name: string)=> {
+    const order = menu.find(pizza => pizza.name === name);
 
-const placeOrder = (name) => {
-    const order = menu.find((pizza) => pizza.name === name)
+    if (!order) {
+        console.log(`${name} does not exist in the menu`);
+        return;
+    }
+
     cashInRegister += order.price;
-    const newOrder = {...order, id: orderId++, status: "ordered"}
+
+    const newOrder: Order = { ...order, id: orderId++, status: "ordered" };
     orderQueue.push(newOrder);
-    return newOrder ;
-}
+
+    return newOrder;
+};
 
 placeOrder("margarita");
 placeOrder("pepperoni");
 placeOrder("hawaiian");
 
-// console.log(cashInRegister);
-// console.log(orderQueue);
+const completeOrder = (id: number) => {
+    const index = orderQueue.findIndex(order => order.id === id);
 
+    if (index === -1) {
+        console.log(`Order with id ${id} not found`);
+        return;
+    }
 
-const completeOrder = (id) => {
-    const placedOrder = orderQueue.find(order => order.id === id)
-    const updatedOrder = {...placedOrder, status: "completed"};
-    return updatedOrder;
-    
-}
+    orderQueue[index].status = "completed";
+    return orderQueue[index];
+};
 
 completeOrder(1);
-
 completeOrder(2);
-
 completeOrder(3);
 
 console.log(orderQueue);
-
