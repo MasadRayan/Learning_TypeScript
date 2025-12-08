@@ -13,7 +13,7 @@ var menu = [
     { name: "margarita", price: 10 },
     { name: "pepperoni", price: 10 },
     { name: "hawaiian", price: 10 },
-    { name: "hawaiian", price: 10 }
+    { name: "khaoa", price: 10 }
 ];
 var cashInRegister = 100;
 var orderQueue = [];
@@ -22,6 +22,7 @@ var addNewPizza = function (pizza) {
     menu.push(pizza);
 };
 addNewPizza({ name: "jashim", price: 20 });
+console.log(menu);
 var placeOrder = function (name) {
     var order = menu.find(function (pizza) { return pizza.name === name; });
     if (!order) {
@@ -36,9 +37,11 @@ var placeOrder = function (name) {
 placeOrder("margarita");
 placeOrder("pepperoni");
 placeOrder("hawaiian");
+placeOrder("khaoa");
+placeOrder("jashim");
 var completeOrder = function (id) {
     var index = orderQueue.findIndex(function (order) { return order.id === id; });
-    if (index === -1) {
+    if (!index) {
         console.log("Order with id ".concat(id, " not found"));
         return;
     }
@@ -48,4 +51,6 @@ var completeOrder = function (id) {
 completeOrder(1);
 completeOrder(2);
 completeOrder(3);
+completeOrder(4);
+completeOrder(5);
 console.log(orderQueue);
