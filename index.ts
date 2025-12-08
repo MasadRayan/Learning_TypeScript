@@ -41,6 +41,7 @@ const completeOrder = (id) => {
 }
 
 completeOrder(1);
+
 completeOrder(2);
 
 completeOrder(3);
