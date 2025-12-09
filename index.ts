@@ -19,7 +19,7 @@ let cashInRegister: number = 100;
 const orderQueue: Order[] = [];
 let orderId: number = 1;
 
-const addNewPizza = (pizza: Pizza) => {
+const addNewPizza = (pizza: Pizza): void => {
     menu.push(pizza);
 }; 
 
@@ -61,7 +61,7 @@ const completeOrder = (id: number) => {
 };
 
 
-const getPizzaDetails = (identifier: string | number) => {
+const getPizzaDetails = (identifier: string | number): Pizza | undefined => {
     const singlePizza  = menu.find(pizza => pizza.name.toLowerCase() === identifier.toString().toLowerCase() || pizza.price === identifier);
     return singlePizza;
 }
