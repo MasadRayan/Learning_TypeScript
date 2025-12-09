@@ -1,4 +1,5 @@
 type Pizza = {
+    id?: number
     name: string
     price: number
 }
@@ -8,11 +9,13 @@ type Order = Pizza & {
     status: 'ordered' | "completed" 
 }
 
+let nextPizzaId: number = 1
+
 const menu: Pizza[] = [
-    { name: "margarita", price: 10 },
-    { name: "pepperoni", price: 10 },
-    { name: "hawaiian", price: 10 },
-    { name: "khaoa", price: 10 }
+    { id: nextPizzaId++, name: "margarita", price: 10 },
+    { id: nextPizzaId++, name: "pepperoni", price: 10 },
+    { id: nextPizzaId++, name: "hawaiian", price: 10 },
+    { id: nextPizzaId++, name: "khaoa", price: 10 }
 ];
 
 let cashInRegister: number = 100;
@@ -20,13 +23,14 @@ const orderQueue: Order[] = [];
 let orderId: number = 1;
 
 const addNewPizza = (pizza: Pizza): void => {
+    pizza.id = nextPizzaId++;
     menu.push(pizza);
 }; 
 
-addNewPizza({ name: "jashim", price: 20 });
+addNewPizza({name: "jashim", price: 20 });
 console.log(menu);
 
-const placeOrder = (name: string)=> {
+const placeOrder = (name: string): Order | undefined=> {
     const order = menu.find(pizza => pizza.name === name);
 
     if (!order) {
@@ -48,7 +52,7 @@ placeOrder("hawaiian");
 placeOrder("khaoa");
 placeOrder("jashim");
 
-const completeOrder = (id: number) => {
+const completeOrder = (id: number): Order | undefined => {
     const index = orderQueue.findIndex(order => order.id === id);
 
     if (!index) {
