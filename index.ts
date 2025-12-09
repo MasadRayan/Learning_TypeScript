@@ -60,6 +60,12 @@ const completeOrder = (id: number) => {
     return orderQueue[index];
 };
 
+
+const getPizzaDetails = (identifier: string | number) => {
+    const singlePizza  = menu.find(pizza => pizza.name.toLowerCase() === identifier.toString().toLowerCase() || pizza.price === identifier);
+    return singlePizza;
+}
+
 completeOrder(1);
 completeOrder(2);
 completeOrder(3);
