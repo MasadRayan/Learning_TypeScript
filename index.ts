@@ -98,7 +98,7 @@ const voters = [
     }
 ]
 
-function getLastItem<PlaceholderType>(array: PlaceholderType[]) {
+function getLastItem<PlaceholderType>(array: PlaceholderType[]): PlaceholderType | undefined {
     return array[array.length - 1]
 }
 
