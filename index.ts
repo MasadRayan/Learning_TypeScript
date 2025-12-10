@@ -61,6 +61,7 @@ const completeOrder = (id: number): Order | undefined => {
     }
 
     orderQueue[index].status = "completed";
+    
     return orderQueue[index];
 };
 
