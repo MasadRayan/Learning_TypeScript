@@ -1,5 +1,5 @@
 type Pizza = {
-    id?: number
+    id: number
     name: string
     price: number
 }
@@ -22,9 +22,13 @@ let cashInRegister: number = 100;
 const orderQueue: Order[] = [];
 let orderId: number = 1;
 
-const addNewPizza = (pizza: Pizza): void => {
-    pizza.id = nextPizzaId++;
-    menu.push(pizza);
+const addNewPizza = (pizza: Omit<Pizza, "id">): Pizza => {
+    const newPizzaObject = {
+        id: nextPizzaId++,
+        ...pizza
+    }
+    menu.push(newPizzaObject);
+    return newPizzaObject;
 }; 
 
 addNewPizza({name: "jashim", price: 20 });
@@ -61,7 +65,6 @@ const completeOrder = (id: number): Order | undefined => {
     }
 
     orderQueue[index].status = "completed";
-    
     return orderQueue[index];
 };
 
