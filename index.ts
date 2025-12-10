@@ -6,7 +6,7 @@ type Pizza = {
 
 type Order = Pizza & {
     id: number
-    status: 'ordered' | "completed" 
+    status: 'ordered' | "completed"
 }
 
 let nextPizzaId: number = 1
@@ -29,12 +29,12 @@ const addNewPizza = (pizza: Omit<Pizza, "id">): Pizza => {
     }
     menu.push(newPizzaObject);
     return newPizzaObject;
-}; 
+};
 
-addNewPizza({name: "jashim", price: 20 });
+addNewPizza({ name: "jashim", price: 20 });
 console.log(menu);
 
-const placeOrder = (name: string): Order | undefined=> {
+const placeOrder = (name: string): Order | undefined => {
     const order = menu.find(pizza => pizza.name === name);
 
     if (!order) {
@@ -70,7 +70,7 @@ const completeOrder = (id: number): Order | undefined => {
 
 
 const getPizzaDetails = (identifier: string | number): Pizza | undefined => {
-    const singlePizza  = menu.find(pizza => pizza.name.toLowerCase() === identifier.toString().toLowerCase() || pizza.price === identifier);
+    const singlePizza = menu.find(pizza => pizza.name.toLowerCase() === identifier.toString().toLowerCase() || pizza.price === identifier);
     return singlePizza;
 }
 
@@ -81,3 +81,27 @@ completeOrder(4);
 completeOrder(5);
 
 console.log(orderQueue);
+
+
+
+
+const gameScore = [10, 11, 12, 13, 14];
+const favouriteThings = ["apple", "banana", "carrot", "dog", "cat"];
+const voters = [
+    {
+        name: "Masad",
+        age: 23,
+    },
+    {
+        name: "Bob",
+        age: 54,
+    }
+]
+
+function getLastItem<PlaceholderType>(array: PlaceholderType[]) {
+    return array[array.length - 1]
+}
+
+console.log(getLastItem(gameScore));
+console.log(getLastItem(favouriteThings));
+console.log(getLastItem(voters));
